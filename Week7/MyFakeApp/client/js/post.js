@@ -7,21 +7,4 @@ class Post {
 
 }
 
-const createPosts = (postList) => {
-    const ourPostList = [];
-    const post = postList.map((postData) => {
-        const {
-            id,
-            title,
-            intro
-        } = postData;
-        const ourPost = new Post(id, title, intro);
-        ourPostList.push(ourPost);
-        return ourPost;
-    })
-    return ourPostList;
-}
-
-export {
-    createPosts
-}
+export default Post
