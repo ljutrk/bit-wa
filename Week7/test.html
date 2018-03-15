@@ -49,6 +49,47 @@ const askMom = function () {
 
 askMom();
 
+ /* ES6 */
+ const isMomHappy = true;
+        const url = "https://api.tvmaze.com/shows";
+
+        // const getData = () => {
+        //     return fetch(url)
+        //         .then((response => {
+        //             return response.json();
+        //         }))
+        
+        const getData = () => fetch(url).then(response => response.json());
+
+        // Promise
+        const willIGetNewPhone = new Promise(
+            (resolve, reject) => { // fat arrow
+                if (isMomHappy) {
+                    resolve(getData());
+                } else {
+                    const reason = new Error('mom is not happy');
+                    reject(reason);
+                }
+
+            }
+        );
+
+        // const showOff = function (phone) {
+        //     const message = 'Hey friend, I have a new ' +
+        //                 phone.color + ' ' + phone.brand + ' phone';
+        //     return Promise.resolve(message);
+        // };
+
+        // call our promise
+        const askMom = function () {
+            willIGetNewPhone
+                // .then(showOff)
+                .then(fulfilled => console.log(fulfilled)) // fat arrow
+                .catch(error => console.log(error.message)); // fat arrow
+        };
+
+        askMom();
+
     </script>
 </body>
 

@@ -1,21 +1,19 @@
-import { createPosts } from "./post.js";
-import { createPostDiv } from "./ui.js";
-
-// import {
-//     Post
-// } from './post.js'
-
-const backendURL = 'http://127.0.0.1:3001/';
+import { createPostDiv, displayError } from "./ui.js";
+import { fetchData } from "./data.js";
 
 const init = () => {
 
     fetchData()
-        .then(posts => {
-            createPostsDiv(posts);
+        .then(function (post) {
+            // console.log(post);
+            createPostDiv(post);
         })
-        .catch(err => {
-            showError()
-        })
+    // .then(posts => {
+    //     createPostDiv(posts);
+    // })
+    // .catch(err => {
+    //     showError()
+    // })
 
 }
 
