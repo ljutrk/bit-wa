@@ -27,14 +27,14 @@ const User = (props) => {
     // console.log(name);
 
     const hideEmailAddress = () => {
-        const firstThree = email.substring(0,3) + "...@";
+        const firstThree = email.substring(0,3) + "...";
         const afterMonkey = email.split('@')[1]
-        const hiddenEmail = firstThree + afterMonkey;  
+        const lastTwo = email.split('@')[0].slice(-2) + "@";
+        const hiddenEmail = firstThree + lastTwo + afterMonkey;  
         return hiddenEmail;
         
     }
-    // console.log(hideEmailAddress());
-    
+    // console.log(hideEmailAddress())
 
     const getDateOfBirth = () => {
         const date = new Date(dob);
@@ -42,16 +42,32 @@ const User = (props) => {
         return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
     }
 
+    // return (
+    //     <ul className="collection">
+    //         <li className="collection-item avatar" >
+    //             <img src={picture.thumbnail} alt="" className="circle" />
+    //             <span className="title">Name: {name}</span>
+    //             <p> email: {hideEmailAddress()} <br />
+    //                 Date Of Birth: {getDateOfBirth()}
+    //             </p>
+    //         </li>
+    //     </ul>
+    // )
+
     return (
-        <ul className="collection">
-            <li className="collection-item avatar" >
-                <img src={picture.thumbnail} alt="" className="circle" />
-                <span className="title">Name: {name}</span>
-                <p> email: {hideEmailAddress()} <br />
-                    Date Of Birth: {getDateOfBirth()}
-                </p>
-            </li>
-        </ul>
+<div>
+    <div className="col s12 m4">
+      <div className="card">
+        <div className="card-image">
+          <img src={picture.large} />
+          <span className="card-title">{name}</span>
+        </div>
+        <div className="card-content">
+          <p>Email: {hideEmailAddress()} <br />Date of Birth: {getDateOfBirth()}</p>
+        </div>
+      </div>
+    </div>
+  </div>
     )
 }
 
@@ -68,7 +84,9 @@ const Main = ({ data }) => {
 
     return (
         <div className="container">
+        <div className="row">
             <UsersList data={users} />
+        </div>
         </div>
     )
 }
