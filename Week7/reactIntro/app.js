@@ -10,13 +10,13 @@ const products = ["apples", "oranges", "bananas"]
 const createProducts = () => {
     return products.map((product, index) => {
         const name = product.toUpperCase();
-        return <Product />
+        return <Product name={product} key={index}  />
     })
 }
 
 const Product = (props) => {
     const {name, index} = props
-    // console.log(props);
+    console.log(props);
     
     return <li key={index}>{name}</li>
 }
