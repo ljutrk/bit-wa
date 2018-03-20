@@ -15,7 +15,7 @@ class User {
     hideEmailAddress(email) {
         const firstThree = email.substring(0, 3) + "...";
         const afterMonkey = email.split('@')[1]
-        const lastTwoBeforeMonkey = email.split('@')[0].slice(-2) + "@";
+        const lastTwoBeforeMonkey = email.split('@')[0].slice(-3) + "@";
         const hiddenEmail = firstThree + lastTwoBeforeMonkey + afterMonkey;
 
         return hiddenEmail;
