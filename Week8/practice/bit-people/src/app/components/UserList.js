@@ -2,12 +2,12 @@ import React from 'react';
 import { UserListItem } from '../components/UserListItem';
 import { UserGridItem } from '../components/UserGridItem';
 
-const UserList = ({ data, isViewList }) => {
-
+const UserList = ({ data, isViewList, searchedUsers }) => {
+    
     return (
         <div className="container">
             <div className="row">
-                {data.map((user, index) => {
+                {searchedUsers().map((user, index) => {
                     if (isViewList) {
                         return <UserListItem key={index} user={user} />
                     } else {

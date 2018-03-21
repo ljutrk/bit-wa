@@ -3,6 +3,8 @@ import { getUsers } from '../services/UserService';
 import { Header } from './partials/Header'
 import { Footer } from './partials/Footer'
 import { UserList } from './components/UserList';
+import { Search } from './partials/Search';
+import { Cube } from './partials/Cube/Cube';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class App extends Component {
     this.state = {
       data: [],
       isViewList: JSON.parse(localStorage.getItem("isListView")),
-      search: ""
+      searchValue: "",
+      isLoading: true
     }
   }
 
@@ -24,9 +27,8 @@ class App extends Component {
   componentDidMount() {
     getUsers()
       .then(users => {
-        this.setState({ data: users });
+        this.setState({ data: users, isLoading: false });
       });
-
   }
 
   onClickChangeView = (event) => {
@@ -43,42 +45,31 @@ class App extends Component {
       });
   }
 
-  searchValueChange = (event) => {
-      this.setState({ search: event.target.value })
-      // console.log(event.target.value);
-      
-      this.state.data = this.state.data.filter(user => {
-        if (user.firstName.includes(event.target.value)) {
-          return user
-        }
-      })
+  searchValue = (value) => {
+    this.setState({ searchValue: value })
+  }
 
+  searchedUsers = () => {
+    return this.state.data.filter(user => {
+      return user.firstName.includes(this.state.searchValue);
+    })
+  }
 
-
-    // getUsers()
-
-    //   .then(users => {
-    //     return users.filter(user => {
-    //       if (user.firstName.includes(event.target.value)) {
-    //         return user
-    //       }
-    //     })
-    //   })
-    //   .then(users => {
-    //     this.setState({ data: users });
-    //   });
-
-    // console.log(event.target.value);
-
-
-
+  showCube() {
+    if (this.state.isLoading) {
+      return <Cube />
+    } else {
+      return <UserList data={this.state.data} isViewList={this.state.isViewList} searchedUsers={this.searchedUsers} />
+    }
   }
 
   render() {
     return (
       <div>
-        <Header onClick={this.onClickChangeView} isViewList={this.state.isViewList} refresh={this.refresh} searchValueChange={this.searchValueChange} searchValue={this.state.search} />
-        <UserList data={this.state.data} isViewList={this.state.isViewList} />
+        <Header onClick={this.onClickChangeView} isViewList={this.state.isViewList} refresh={this.refresh} />
+        <Search searchValue={this.searchValue} />
+        {this.showCube()}
+
         <Footer />
       </div>
     );
