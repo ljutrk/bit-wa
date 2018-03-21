@@ -1,5 +1,6 @@
 class User {
     constructor(user) {
+        this.gender=user.gender;
         this.name = user.name;
         this.picture = user.picture;
         this.email = user.email;
