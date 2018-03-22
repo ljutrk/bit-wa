@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Header = ({ onClick, isViewList, refresh, searchValueChange, searchValue }) => {
+const Header = ({ onClick, isViewList, refresh, searchValueChange, searchValue, goToAbout, aboutPageState }) => {
 
     const changeIcon = () => {
         if (isViewList) {
@@ -10,13 +11,28 @@ const Header = ({ onClick, isViewList, refresh, searchValueChange, searchValue }
         }
     }
 
+    const aboutPage = () => {
+        console.log("headerpagestate",aboutPageState);
+        
+        if (aboutPageState) {
+            return (<ul className="right hide-on-med-and-down">
+                <li><Link onClick={goToAbout} to='/about'>About</Link></li>
+                <li><a href="badges.html" onClick={onClick}><i className="material-icons">{changeIcon()}</i></a></li>
+                <li><a href="http://localhost:3000/" onClick={refresh}><i className="material-icons">refresh</i></a></li>
+            </ul>
+            )
+        } else {
+            return
+        }
+    }
+
+
     return (
         <nav>
             <div className="nav-wrapper">
-                <a href="http://localhost:3000/" className="brand-logo center">Bit People</a>
+                <Link to='/' className="brand-logo center">Bit People</Link>
                 <ul className="right hide-on-med-and-down">
-                    <li><a href="badges.html" onClick={onClick}><i className="material-icons">{changeIcon()}</i></a></li>
-                    <li><a href="http://localhost:3000/" onClick={refresh}><i className="material-icons">refresh</i></a></li>
+                    {aboutPage()}
                 </ul>
             </div>
         </nav>

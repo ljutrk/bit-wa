@@ -1,8 +1,9 @@
 class User {
     constructor(user) {
+        this.fullName = `${user.name.first}${user.name.last}`
         this.gender = user.gender;
-        this.firstName = user.name.first;
-        this.lastName = user.name.last;
+        this.firstName = this.capitalizeFirstLetter(user.name.first);
+        this.lastName = this.capitalizeFirstLetter(user.name.last);
         this.picture = user.picture.large;
         this.dateOfBirth = this.getDateOfBirth(user.dob);
         this.email = this.hideEmailAddress(user.email);
@@ -21,6 +22,10 @@ class User {
         const hiddenEmail = firstThree + lastTwoBeforeMonkey + afterMonkey;
 
         return hiddenEmail;
+    }
+
+    capitalizeFirstLetter (name) {
+        return name.charAt(0).toUpperCase() + name.slice(1);
     }
 
 }

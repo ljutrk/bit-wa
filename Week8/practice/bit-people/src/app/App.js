@@ -13,7 +13,8 @@ class App extends Component {
       data: [],
       isViewList: JSON.parse(localStorage.getItem("isListView")),
       searchValue: "",
-      isLoading: true
+      isLoading: true,
+      aboutPageState: ""
     }
   }
 
@@ -22,6 +23,8 @@ class App extends Component {
       localStorage.setItem("isListView", true);
       this.setState({ isViewList: JSON.parse(localStorage.getItem("isListView")) });
     }
+    this.setState({ aboutPageState: true })
+
   }
 
   componentDidMount() {
@@ -29,6 +32,11 @@ class App extends Component {
       .then(users => {
         this.setState({ data: users, isLoading: false });
       });
+    console.log(this.state.aboutPageState);
+    const goToAbout = () => {
+      this.setState({ aboutPageState: false })
+
+    }
   }
 
   onClickChangeView = (event) => {
@@ -46,12 +54,12 @@ class App extends Component {
   }
 
   searchValue = (value) => {
-    this.setState({ searchValue: value })
+    this.setState({ searchValue: value.toLowerCase() })
   }
 
   searchedUsers = () => {
     return this.state.data.filter(user => {
-      return user.firstName.includes(this.state.searchValue);
+      return user.fullName.includes(this.state.searchValue);
     })
   }
 
@@ -63,10 +71,12 @@ class App extends Component {
     }
   }
 
+
+
   render() {
     return (
       <div>
-        <Header onClick={this.onClickChangeView} isViewList={this.state.isViewList} refresh={this.refresh} />
+        <Header onClick={this.onClickChangeView} isViewList={this.state.isViewList} refresh={this.refresh} goToAbout={this.goToAbout} aboutPageState={this.state.aboutPageState} />
         <Search searchValue={this.searchValue} />
         {this.showCube()}
 
