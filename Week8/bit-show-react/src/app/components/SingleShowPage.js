@@ -1,21 +1,36 @@
 import React, { Fragment } from 'react';
 import { Header } from './partials/Header';
 import { Footer } from './partials/Footer';
-import { fetchSingleShow } from '../../services/ShowService';
+import { fetchShows, fetchSingleShow } from '../../services/ShowService';
 import { Seasons } from './seasons/Seasons'
 import { Cast } from './cast/Cast'
+import { Cube } from './partials/screenLoader/Cube';
+
 
 class SingleShowPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: null
+            searchValue: "",
+            show: null,
+            shows: []
         }
     }
 
     componentDidMount() {
+
+        fetchShows()
+            .then(shows => { this.setState({ shows }) });
+
         const showId = this.props.match.params.id;
         fetchSingleShow(showId)
+            .then(show => {
+                this.setState({ show })
+            })
+    }
+
+    clickFromSearch = (eventID) => {
+        fetchSingleShow(eventID)
             .then(show => {
                 this.setState({ show })
             })
@@ -25,12 +40,12 @@ class SingleShowPage extends React.Component {
         // console.log(this.state.show);
 
         if (!this.state.show) {
-            return <h3>Loading...</h3>
+            return <Cube />
         }
 
         return (
             <Fragment>
-                <Header />
+                <Header shows={this.state.shows} clickFromSearch={this.clickFromSearch} />
                 <main className="container">
                     <h1 className="single-show-title"></h1>
                     <div className="row row1">

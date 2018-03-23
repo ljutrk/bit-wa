@@ -2,7 +2,7 @@ import React from 'react';
 import { ShowCardItem } from './ShowCardItem';
 
 const ShowList = ({ showList }) => {
-
+    
     return (
         <main className="container">
             <div className="headline-holder">

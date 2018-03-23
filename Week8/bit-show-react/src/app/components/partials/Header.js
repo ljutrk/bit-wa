@@ -1,14 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+import { Search } from './Search';
 
-const Header = () => {
+const Header = ({shows, clickFromSearch}) => {
+    
     return (
         <nav id="main-nav" className="navbar justify-content-between">
         <div className="container">
-            <a className="navbar-brand">BitShow</a>
-            <form className="form-inline">
-                <input className="form-control" type="search" placeholder="Search" aria-label="Search" />
-                <ul className="search-results"></ul>
-            </form>
+            <Link to='/' className="navbar-brand">BitShow</Link>
+                <Search shows={shows} clickFromSearch={clickFromSearch} />
         </div>
     </nav>
     );

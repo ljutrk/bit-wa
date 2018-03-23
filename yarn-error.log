@@ -1,0 +1,32 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\student\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\student\bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Ruby24-x64\bin;C:\program files\Ruby24-x64\bin;C:\Users\student\AppData\Local\Microsoft\WindowsApps;C:\Users\student\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Microsoft VS Code\bin;C:\Users\student\AppData\Roaming\npm
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.9.4
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find a package.json file in "C:\\Users\\student\\Documents\\GitHub\\ljubomir\\bit-wa"
+      at new MessageError (C:\Users\student\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:186:110)
+      at C:\Users\student\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:40048:15
+      at Generator.next (<anonymous>)
+      at step (C:\Users\student\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:98:30)
+      at C:\Users\student\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:109:13
+      at <anonymous>

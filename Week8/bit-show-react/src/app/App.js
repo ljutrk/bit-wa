@@ -16,12 +16,13 @@ class App extends Component {
       .then(shows => { this.setState({ shows }) })
 
 
+    
   }
 
   render() {
     return (
       <Fragment>
-        <Header />
+        <Header shows={this.state.shows} />
         <ShowList showList={this.state.shows} />
         <Footer />
       </Fragment>
