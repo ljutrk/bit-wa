@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const PostCard = ({ post }) => {
     // console.log(post);
-    const postID = `/post/:${post.id}`
+    const postID = `/post/${post.id}`
 
     return (
         <Link to={postID}>

@@ -12,6 +12,22 @@ class ServicePost {
                 });
             });
     }
+
+    fetchPostsFromOneAuthor = (id) => {
+        return fetch(`${url.postsFromOneAuthorURL}${id}`)
+            .then(response => response.json())
+            .then(posts => {
+                return posts.map(post => {
+                    return new Post(post);
+                });
+            });
+    }
+
+    fetchSinglePost = (id) => {
+        return fetch(`${url.postsURL}/${id}`)
+            .then(response => response.json())
+            .then(post => new Post(post));
+    }
 }
 
 export const servicePost = new ServicePost()
