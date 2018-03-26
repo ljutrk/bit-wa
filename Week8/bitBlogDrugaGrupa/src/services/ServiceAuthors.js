@@ -5,6 +5,7 @@ class ServiceAuthors {
 
     fetchAuthors = () => {
         return fetch(url.authorsURL)
+            // return fetch("http://localhost:3004/users")
             .then(response => response.json())
             .then(authors => {
                 return authors.map(author => {
@@ -20,6 +21,7 @@ class ServiceAuthors {
             .then(author => new Author(author));
 
     }
+
 
 }
 

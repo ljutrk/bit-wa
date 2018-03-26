@@ -22,7 +22,7 @@ class HomePage extends React.Component {
         }
         servicePost.fetchPosts()
             .then(posts => {
-                const newArr = [...this.state.newPosts.reverse(), ...posts]
+                const newArr = [...this.state.newPosts.reverse(), ...posts.reverse()]
                 this.setState({ posts: newArr })
             });
         console.log(this.state);

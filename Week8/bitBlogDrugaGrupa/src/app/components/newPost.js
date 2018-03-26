@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Post } from '../../entities/Post';
+import { servicePost } from '../../services/ServicePost';
 
 class newPost extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ class newPost extends Component {
         this.state = {
             titleInputValue: "",
             textInputValue: "",
-            newPostsArray: JSON.parse(localStorage.getItem("post")) || []
+            authorInputValue: "",
+            // newPostsArray: JSON.parse(localStorage.getItem("post")) || []
         }
     }
 
@@ -24,16 +26,27 @@ class newPost extends Component {
 
     }
 
-    buttonClickHandler = () => {
-        const newPost = {
-            title: this.state.titleInputValue,
-            userId: "",
-            id: "",
-            body: this.state.textInputValue
-        }
+    authorInputChangeHandler = (event) => {
 
-        this.setState({ newPosts: this.state.newPostsArray.push(newPost) })
-        localStorage.setItem("post", JSON.stringify(this.state.newPostsArray))
+        this.setState({ authorInputValue: event.target.value });
+
+    }
+
+    buttonClickHandler = () => {
+        console.log(this.state);
+
+        servicePost.createNewPost(this.state.titleInputValue, this.state.textInputValue, this.state.authorInputValue)
+        // .then(response => console.log(response));
+
+        // const newPost = {
+        //     title: this.state.titleInputValue,
+        //     userId: "",
+        //     id: "",
+        //     body: this.state.textInputValue
+        // }
+
+        // this.setState({ newPosts: this.state.newPostsArray.push(newPost) })
+        // localStorage.setItem("post", JSON.stringify(this.state.newPostsArray))
 
     }
 
@@ -46,7 +59,11 @@ class newPost extends Component {
                     </label>
 
                     <label> Post Text
-                    <input onChange={this.textInputChangeHandler} value={this.state.textInputValue} placeholder="text" type="text" />
+                    <input onChange={this.textInputChangeHandler} value={this.state.textInputValue} placeholder="Text" type="text" />
+                    </label>
+
+                    <label> Post Author
+                    <input onChange={this.authorInputChangeHandler} value={this.state.authorInputValue} placeholder="Author ID" type="text" />
                     </label>
                 </form>
                 <Link to='/'>
