@@ -52,22 +52,25 @@ class SinglePostPage extends React.Component {
         }
 
         return (
-            <div>
-                <BackToPosts />
-                <h2 className="center-align">{this.state.thisPost.title}</h2>
-                <Link to="/authors/:id">{this.state.postAuthor.name}</Link>
-                <p>{this.state.thisPost.body}</p>
-                <hr />
-                <h3>{this.state.posts.length -1} more posts from same author</h3>
-                <ul>
-                    {this.state.posts.map((post, index) => {
-                        const postLink = `/post/${post.id}`;
-                        if (index + 1 == this.props.match.params.id) {
-                            return
-                        }
-                        return <li key={index}><Link key={index} to={postLink} >{post.title}</Link></li>
-                    })}
-                </ul>
+            <div className="container ">
+                <div className="col-8 offset-2 card-panel ">
+                    <BackToPosts />
+                    <h2 className="center-align">{this.state.thisPost.title}</h2>
+                    <Link to="/authors/:id">
+                        <h3 className="center-align">{this.state.postAuthor.name}</h3></Link>
+                    <p>{this.state.thisPost.body}</p>
+                    <hr />
+                    <h3>{this.state.posts.length - 1} more posts from same author</h3>
+                    <ul>
+                        {this.state.posts.map((post, index) => {
+                            const postLink = `/post/${post.id}`;
+                            if (index + 1 == this.props.match.params.id) {
+                                return
+                            }
+                            return <li key={index}><Link key={index} to={postLink} >{post.title}</Link></li>
+                        })}
+                    </ul>
+                </div>
             </div>
         )
     }

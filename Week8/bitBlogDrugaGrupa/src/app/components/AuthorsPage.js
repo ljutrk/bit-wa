@@ -15,7 +15,7 @@ class AuthorsPage extends React.Component {
 
     render() {
         return (
-            <div className="collection">
+            <div className="collection card-panel">
                 {this.state.authors.map((author, index) => <AuthorCard key={index} author={author} />)}
             </div>
         )

@@ -5,6 +5,7 @@ import { SingleAuthorPage } from "./SingleAuthorPage";
 import { AuthorsPage } from "./AuthorsPage";
 import { AboutPage } from "./AboutPage";
 import { HomePage } from "./HomePage";
+import { newPost } from "./newPost";
 
 
 const Main = () => {
@@ -12,6 +13,7 @@ const Main = () => {
         <div className="container">
             <Switch>
                 <Route exact path="/" component={HomePage} />
+                <Route path="/post/new" component={newPost} />
                 <Route path="/post/:id" component={SinglePostPage} />
                 <Route path="/author/:id" component={SingleAuthorPage} />
                 <Route path="/authors" component={AuthorsPage} />
@@ -20,4 +22,5 @@ const Main = () => {
         </div>
     )
 }
-export { Main }
+
+export { Main };

@@ -11,7 +11,7 @@ const PostCard = ({ post }) => {
         <Link to={postID}>
             <div className="col s12">
                 <div className="card">
-                    <div className="card-content black-text">
+                    <div className="card-content black-text hoverable">
                         <span className="card-title">{post.title}</span>
                         <p>{post.body}</p>
                     </div>

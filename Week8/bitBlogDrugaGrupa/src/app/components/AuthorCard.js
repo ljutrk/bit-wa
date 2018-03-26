@@ -9,7 +9,8 @@ const AuthorCard = ({ author }) => {
     const authorID = `/author/${author.id}`
 
     return (
-        <Link to={authorID} className="collection-item">{author.name}</Link >
+
+        <Link to={authorID} className="collection-item ">{author.name}</Link >
     )
 }
 

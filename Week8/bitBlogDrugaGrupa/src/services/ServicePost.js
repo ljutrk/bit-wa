@@ -13,6 +13,12 @@ class ServicePost {
             });
     }
 
+    fetchNewPosts = (posts) => {
+        return posts.map(post => {
+            return new Post(post);
+        });
+    }
+
     fetchPostsFromOneAuthor = (id) => {
         return fetch(`${url.postsFromOneAuthorURL}${id}`)
             .then(response => response.json())
@@ -29,5 +35,6 @@ class ServicePost {
             .then(post => new Post(post));
     }
 }
+
 
 export const servicePost = new ServicePost()

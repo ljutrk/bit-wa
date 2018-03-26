@@ -11,4 +11,3 @@ const AuthorItem = ({ authors }) => {
     )
 }
 export { AuthorItem }
-
