@@ -1,7 +1,6 @@
-import React from "react";
-import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-
+import React from 'react';
+import { compose, withProps } from 'recompose';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
 const MyMapComponent = compose(
     withProps({
@@ -19,7 +18,7 @@ const MyMapComponent = compose(
     >
         {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />}
     </GoogleMap>
-))
+)
 
 class MyFancyComponent extends React.PureComponent {
     state = {

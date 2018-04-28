@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Post } from '../../entities/Post';
+import { withRouter, Link } from 'react-router-dom';
 import { servicePost } from '../../services/ServicePost';
 
 class newPost extends Component {
@@ -10,65 +9,55 @@ class newPost extends Component {
             titleInputValue: "",
             textInputValue: "",
             authorInputValue: "",
-            // newPostsArray: JSON.parse(localStorage.getItem("post")) || []
+            newPostsArray: JSON.parse(localStorage.getItem("newPosts")) || []
         }
     }
 
     titleInputChangeHandler = (event) => {
-
         this.setState({ titleInputValue: event.target.value });
-
     }
 
     textInputChangeHandler = (event) => {
-
         this.setState({ textInputValue: event.target.value });
-
     }
 
     authorInputChangeHandler = (event) => {
-
         this.setState({ authorInputValue: event.target.value });
-
     }
 
-    buttonClickHandler = () => {
-        console.log(this.state);
-
+    createNewPost = () => {
         servicePost.createNewPost(this.state.titleInputValue, this.state.textInputValue, this.state.authorInputValue)
-        // .then(response => console.log(response));
-
-        // const newPost = {
-        //     title: this.state.titleInputValue,
-        //     userId: "",
-        //     id: "",
-        //     body: this.state.textInputValue
-        // }
-
-        // this.setState({ newPosts: this.state.newPostsArray.push(newPost) })
-        // localStorage.setItem("post", JSON.stringify(this.state.newPostsArray))
+            .then(response => {
+                let postID = 0;
+                if (localStorage.getItem("newPosts") !== null) {
+                    postID = JSON.parse(localStorage.getItem("newPosts")).length + response.id;
+                } else {
+                    postID = response.id;
+                }
+                const newPost = {
+                    title: response.title,
+                    userId: parseInt(response.userId, 10),
+                    id: postID,
+                    body: response.body
+                }
+                this.setState({ newPosts: this.state.newPostsArray.push(newPost) });
+                localStorage.setItem("newPosts", JSON.stringify(this.state.newPostsArray));
+                this.props.history.push("/");
+            });
 
     }
 
     render() {
         return (
             <div className="collection card-panel">
-                <form>
-                    <label> Post Title
-                    <input onChange={this.titleInputChangeHandler} value={this.state.titleInputValue} placeholder="Title" type="text" />
-                    </label>
-
-                    <label> Post Text
-                    <input onChange={this.textInputChangeHandler} value={this.state.textInputValue} placeholder="Text" type="text" />
-                    </label>
-
-                    <label> Post Author
-                    <input onChange={this.authorInputChangeHandler} value={this.state.authorInputValue} placeholder="Author ID" type="text" />
-                    </label>
-                </form>
+                <p>Create New Post!</p>
+                <input onChange={this.titleInputChangeHandler} value={this.state.titleInputValue} placeholder="Title" type="text" />
+                <input onChange={this.textInputChangeHandler} value={this.state.textInputValue} placeholder="Text" type="text" />
+                <input onChange={this.authorInputChangeHandler} value={this.state.authorInputValue} placeholder="Author ID" type="text" />
+                <button onClick={this.createNewPost} className="btn-newPost btn waves-effect waves-light" name="newPost">POST
+                    </button>
                 <Link to='/'>
-                    <button onClick={this.buttonClickHandler} className="btn waves-effect waves-light" type="submit" name="action">Submit
-                     <i className="material-icons right">send</i>
+                    <button className="btn-newPost btn waves-effect waves-light right">cancel
                     </button>
                 </Link>
             </div>
@@ -77,4 +66,4 @@ class newPost extends Component {
 }
 
 
-export { newPost };
+export default withRouter(newPost);

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Switch, Route } from "react-router-dom";
-import { SinglePostPage } from "./SinglePostPage";
-import { SingleAuthorPage } from "./SingleAuthorPage";
-import { AuthorsPage } from "./AuthorsPage";
-import { AboutPage } from "./AboutPage";
-import { HomePage } from "./HomePage";
-import { newPost } from "./newPost";
-
+import { Switch, Route } from 'react-router-dom';
+import { SinglePostPage } from './SinglePostPage';
+import { SingleAuthorPage } from './SingleAuthorPage';
+import { AuthorsPage } from './AuthorsPage';
+import { AboutPage } from './AboutPage';
+import { HomePage } from './HomePage';
+import newPost from './newPost';
 
 const Main = () => {
     return (
@@ -20,7 +19,7 @@ const Main = () => {
                 <Route exact path="/about" component={AboutPage} />
             </Switch>
         </div>
-    )
+    );
 }
 
 export { Main };

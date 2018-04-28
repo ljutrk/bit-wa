@@ -1,9 +1,9 @@
-import React from "react"
-import { BackToPosts } from "../partials/BackToPosts";
-import { Link } from "react-router-dom"
-import { servicePost } from "../../services/ServicePost";
-import { serviceAuthors } from "../../services/ServiceAuthors";
-import { Square } from '../partials/loadingSquare/Square'
+import React from 'react';
+import { BackToPosts } from '../partials/BackToPosts';
+import { Link } from 'react-router-dom';
+import { servicePost } from '../../services/ServicePost';
+import { serviceAuthors } from '../../services/ServiceAuthors';
+import { Square } from '../partials/loadingSquare/Square';
 
 class SinglePostPage extends React.Component {
     constructor(props) {
@@ -17,7 +17,9 @@ class SinglePostPage extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchData(this.props.match.params.id);
+        if (this.props.match.params.id < 101) {
+            this.fetchData(this.props.match.params.id);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -29,16 +31,16 @@ class SinglePostPage extends React.Component {
         Promise.resolve(
             servicePost.fetchSinglePost(postID)
                 .then(post => {
-                    this.setState({ thisPost: post })
+                    this.setState({ thisPost: post });
                     return this.state.thisPost.userId;
                 })
                 .then(userID => {
                     servicePost.fetchPostsFromOneAuthor(userID)
-                        .then(posts => this.setState({ posts }))
+                        .then(posts => this.setState({ posts }));
                     serviceAuthors.fetchAuthor(userID)
                         .then(author => {
-                            this.setState({ postAuthor: author })
-                            this.setState({ isLoading: false })
+                            this.setState({ postAuthor: author });
+                            this.setState({ isLoading: false });
                         })
 
                 })
@@ -46,17 +48,25 @@ class SinglePostPage extends React.Component {
     }
 
     render() {
+        if (this.props.match.params.id > 100) {
+            return (
+                <div>
+                    <BackToPosts />
+                    <h3>fake api doesnt support adding new posts, sorry, no details for the posts you created. They are only stored in local sorage to be shown on homepage!</h3>
+                </div>
+            );
+        }
 
         if (this.state.isLoading) {
             return Square();
         }
-
+        const authorID = `/author/${this.state.postAuthor.id}`
         return (
             <div className="container ">
                 <div className="col-8 offset-2 card-panel ">
                     <BackToPosts />
                     <h2 className="center-align">{this.state.thisPost.title}</h2>
-                    <Link to="/authors/:id">
+                    <Link to={authorID}>
                         <h3 className="center-align">{this.state.postAuthor.name}</h3></Link>
                     <p>{this.state.thisPost.body}</p>
                     <hr />
@@ -64,15 +74,15 @@ class SinglePostPage extends React.Component {
                     <ul>
                         {this.state.posts.map((post, index) => {
                             const postLink = `/post/${post.id}`;
-                            if (index + 1 == this.props.match.params.id) {
-                                return
+                            if (post.id === parseInt(this.props.match.params.id, 10)) {
+                                return "";
                             }
                             return <li key={index}><Link key={index} to={postLink} >{post.title}</Link></li>
                         })}
                     </ul>
                 </div>
             </div>
-        )
+        );
     }
 }
 export { SinglePostPage };

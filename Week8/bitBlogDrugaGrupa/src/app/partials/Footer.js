@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 
 const Footer = () => {
     return (
@@ -7,7 +7,7 @@ const Footer = () => {
                 © 2018 Copyright Text
              </div>
         </footer>
-    )
+    );
 }
 
-export { Footer }
+export { Footer };

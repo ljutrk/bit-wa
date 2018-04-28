@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link } from "react-router-dom"
-
-
+import { Link } from 'react-router-dom';
 
 const PostCard = ({ post }) => {
-    // console.log(post);
-    const postID = `/post/${post.id}`
-
+    const postID = `/post/${post.id}`;
     return (
         <Link to={postID}>
             <div className="col s12">
@@ -18,7 +14,7 @@ const PostCard = ({ post }) => {
                 </div>
             </div>
         </Link>
-    )
+    );
 }
 
 export { PostCard };

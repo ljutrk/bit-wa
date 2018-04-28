@@ -7,4 +7,4 @@ class Post {
     }
 }
 
-export { Post }
+export { Post };

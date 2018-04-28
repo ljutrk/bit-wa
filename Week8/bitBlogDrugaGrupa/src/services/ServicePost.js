@@ -1,11 +1,10 @@
-import { Post } from "../entities/Post";
+import { Post } from '../entities/Post';
 import { url } from '../shared/constants';
 
 class ServicePost {
 
     fetchPosts = () => {
-        // return fetch(url.postsURL)
-        return fetch("http://localhost:3004/posts")
+        return fetch(url.postsURL)
             .then(response => response.json())
             .then(posts => {
                 return posts.map(post => {
@@ -37,7 +36,7 @@ class ServicePost {
     }
 
     createNewPost = (title, body, userID) => {
-        return fetch('http://localhost:3004/posts', {
+        return fetch(url.createNewPost, {
             method: 'POST',
             body: JSON.stringify({
                 title: title,
@@ -45,13 +44,11 @@ class ServicePost {
                 userId: userID
             }),
             headers: {
-                'Accept': 'application/json',
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-            .then(response => response.json())
+            .then(response => response.json());
     }
 }
 
-
-export const servicePost = new ServicePost()
+export const servicePost = new ServicePost();
